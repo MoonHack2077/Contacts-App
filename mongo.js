@@ -10,4 +10,7 @@ mongoose.connect(connectionString)
     console.log('CONNECTED')
   })
   .catch(console.error)
-  
+
+process.on('uncaughtException', error => {
+  mongoose.connection.close()
+})  

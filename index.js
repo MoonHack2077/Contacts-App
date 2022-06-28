@@ -8,6 +8,7 @@ const usersRouter = require('./controllers/users.js')
 const notesRouter = require('./controllers/notes.js')
 const express = require('express')
 const cors = require('cors')
+const loginRouter = require('./controllers/login.js')
 const app = express()
 const { PORT } = process.env
 
@@ -23,6 +24,7 @@ app.get('/', (request, response) => {
 })
 
 //Using routes to have a clean code
+app.use('/login', loginRouter)
 app.use('/api/notes', notesRouter)
 app.use('/api/users', usersRouter)
 
