@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const notesRouter = require('express').Router()
 const Note = require('../models/Note.js')
 const User = require('../models/User.js')
+const userExtractor = require('../middlewares/userExtractor.js')
 
 notesRouter.get('/:id', async (request, response, next) => {
 // With request.params we are getting the param from the url that we need
@@ -31,31 +31,14 @@ notesRouter.get('/', async (request, response) => {
    }
 })
 
-notesRouter.post('/', async ( request, response) => {
+notesRouter.post('/', userExtractor, async (request, response) => {
    const { content, important = false } = request.body
-   const auth = request.headers.authorization
-   let token = null
-   if( auth && auth.toLowerCase().startsWith('bearer') ){
-    token = auth.split(' ')[1]
-   }
-
-   let decodedToken = null 
-   try{
-    decodedToken = jwt.verify(token, process.env.SECRETWORD)
-   }catch(error){
-    console.log(error)
-   }
-
-   if(!token || !decodedToken.id){
-    return response.status(401).json({ error: 'Token missing or invalid' })
-   }
-   //const user = User.findOne(userId)
 
    if (!content) {
     response.status(400).json({ error: 'No content' }).end()
-    }
+  }
 
-  const { id:userId } = decodedToken
+  const { userId } = request
   const user = await User.findById(userId)
   const newNote = new Note({
     content,
@@ -75,7 +58,7 @@ notesRouter.post('/', async ( request, response) => {
   response.status(201).json(savedNote)
 })
 
-notesRouter.delete('/:id', async (request, response, next) => {
+notesRouter.delete('/:id',  async (request, response, next) => {
   try{  
     const id = request.params.id
     await Note.findByIdAndRemove(id)

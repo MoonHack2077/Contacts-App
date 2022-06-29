@@ -10,7 +10,7 @@ loginRouter.post('/', async (request, response)=>{
         const verify = user === null ? false : bcrypt.compare(password, user.passwordHash)
 
         if(!(user && verify)){
-            response.status(400).json({ error: 'Invalidd user or password' }).end()
+            return response.status(400).json({ error: 'Invalid user or password' }).end()
         }
         const userForToken = {
             id: user._id,
