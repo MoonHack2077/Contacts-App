@@ -39,6 +39,10 @@ export const Input = styled.input`
         color: #fff;
     }
 
+    &:focus &::placeholder{
+        color: #eee
+    }
+    
     &:hover{
         filter: brightness(.8)
     }

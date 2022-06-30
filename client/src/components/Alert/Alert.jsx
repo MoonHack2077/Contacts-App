@@ -1,8 +1,9 @@
 import React from 'react'
+import { Container } from './styles.js'
 
-function Alert(){
+function Alert({ message }){
     return(
-        <div>It´s an alert</div>
+        <Container>{ message }</Container>
     )
 }
 
