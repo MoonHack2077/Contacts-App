@@ -7,7 +7,7 @@ const connectionString = NODE_ENV === 'test' ? MONGO_DB_URI_TEST : MONGO_DB_URI
 // returns a promise
 mongoose.connect(connectionString)
   .then(() => {
-    console.log('CONNECTED')
+    console.log('DATABASE CONNECTED')
   })
   .catch(console.error)
 
