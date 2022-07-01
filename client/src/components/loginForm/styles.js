@@ -18,7 +18,8 @@ export const Form = styled.form`
     max-width: 300px;
     padding: 20px;
     border-radius: 20px;
-    transform: scale(1.1)
+    transform: scale(1.1);
+    z-index: 0;
 `
 
 export const InputContainer = styled.div`

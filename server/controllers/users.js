@@ -33,6 +33,15 @@ userRouter.get('/', async (request, response)=>{
   response.json(users)
 })
 
+userRouter.get('/:id', async (request, response)=>{
+  const { id } = request.params
+  const user = await User.findById(id).populate('notes', {
+    content: 1,
+    date: 1
+  })
+  response.json(user)
+})
+
 userRouter.delete('/:id', async (request, response)=>{
   const { id } = request.params
   const deletedUser = await User.findOneAndRemove(id)

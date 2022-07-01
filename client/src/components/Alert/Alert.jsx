@@ -1,9 +1,11 @@
 import React from 'react'
-import { Container } from './styles.js'
+import { Container, Span } from './styles.js'
 
 function Alert({ message }){
     return(
-        <Container>{ message }</Container>
+        <Container>
+            <Span>{ message }!!!</Span>
+        </Container>
     )
 }
 

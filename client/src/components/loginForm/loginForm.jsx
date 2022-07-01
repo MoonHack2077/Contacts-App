@@ -25,8 +25,8 @@ function LoginForm() {
     try{
       const user = await login({ username, password })
       if(user) {
-        window.sessionStorage('USERTOKEN', JSON.stringify(user.token))
-        navigate('/home')
+        window.sessionStorage.setItem('USERTOKEN', JSON.stringify(user.token))
+        navigate(`/notes/${user.id}`)
       }
     }catch(e){
       console.error(e)
@@ -37,9 +37,8 @@ function LoginForm() {
 
   return (
     <>
-      {error.exists && <Alert message={error.message} />}
-
       <FormContainer>
+        {error.exists && <Alert message={error.message} />}
         <Form onSubmit={onSubmit} >
           <InputContainer>
             <Input placeholder={'Username'} required type="text" value={username} onChange={handleUsername}/>

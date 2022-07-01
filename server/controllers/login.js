@@ -22,7 +22,8 @@ loginRouter.post('/', async (request, response)=>{
         response.send({
             name: user.name,
             username,
-            token
+            token,
+            id: user._id
         })
     } catch(error){
         console.log(error)
