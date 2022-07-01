@@ -8,7 +8,7 @@ const app = express()
 
 //ROUTES
 const usersRouter = require('./controllers/users.js')
-const notesRouter = require('./controllers/notes.js')
+const contactsRouter = require('./controllers/contacts.js')
 const loginRouter = require('./controllers/login.js')
 
 //MIDDLEWARES
@@ -23,7 +23,7 @@ app.use(express.json())
 
 //Using routes to have a clean code
 app.use('/login', loginRouter)
-app.use('/api/notes', notesRouter)
+app.use('/api/contacts', contactsRouter)
 app.use('/api/users', usersRouter)
 
 //Error managament

@@ -3,20 +3,24 @@ const uniqueValidator = require('mongoose-unique-validator')
 const { Schema, model } = mongoose
 
 const userSchema = new Schema({
-  username: {
+  name: {
     type: String,
     unique: true,
     required: true
   },
-  name: String,
+  email: {
+    type: String,
+    unique: true,
+    required: true
+  },
   password: {
     type: String,
     unique: true,
     required: true
   },
-  notes: [{
+  contacts: [{
     type: Schema.Types.ObjectId,
-    ref: 'Note'
+    ref: 'Contact'
   }]
 })
 
@@ -26,7 +30,7 @@ userSchema.set('toJSON', {
   transform: (document, returnObject) =>{
   returnObject.id = returnObject._id
 
-        //Normally, delete, is a bad practice!!!
+  //Normally, delete, is a bad practice!!!
   delete returnObject._id
   delete returnObject.__v
   delete returnObject.password

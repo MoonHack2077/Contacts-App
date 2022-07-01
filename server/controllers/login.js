@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt')
 
 loginRouter.post('/', async (request, response)=>{
     try{
-        const { username, password } = request.body
-        const user = await User.findOne({ username })
+        const { email, password } = request.body
+        const user = await User.findOne({ email })
         const verify = user === null ? false : bcrypt.compare(password, user.password)
         
         if(!(user && verify)){
@@ -14,16 +14,15 @@ loginRouter.post('/', async (request, response)=>{
         }
         const userForToken = {
             id: user._id,
-            username
+            email
         }
         //The first argument sended is the json to convert, and the second one is the secret word to create the token
         const token = jwt.sign(userForToken, process.env.SECRETWORD)
 
         response.send({
             name: user.name,
-            username,
-            token,
-            id: user._id
+            email,
+            token
         })
     } catch(error){
         console.log(error)

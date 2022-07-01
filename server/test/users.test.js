@@ -1,8 +1,9 @@
 const User = require('../models/User.js')
 const mongoose = require('mongoose')
-const { initialUsers, api, getAllUsers } = require('./helpers.js')
-const { server } = require('../index.js')
 const bcrypt = require('bcrypt')
+const api = require('../helpers/test/supertest')
+const { initialUsers, getAllUsers } = require('../helpers/test/users')
+const { server } = require('../index.js')
 
 describe('USER TESTING', ()=>{
 

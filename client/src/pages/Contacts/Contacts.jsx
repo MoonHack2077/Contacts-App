@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../../constants'
-import { Note } from '../../components/Note/Note.jsx'
+import { Contact } from '../../components/Contact/Contact.jsx'
 import { useParams } from 'react-router-dom'
 
-function Notes() {
+function Contacts() {
   const [user, setUser] = useState({})
 
-  const id = useParams('id')
+  const id = useParams()
   console.log(user)
   const findUser = () => {
     const foundUser = axios.get(`${BASE_URL}/api/users/${id}`)
@@ -24,12 +24,12 @@ function Notes() {
   return (
     <div>
       {
-        user?.notes?.map(note => (
-          <Note {...note} />
+        user?.contacts?.map(contact => (
+          <Contact {...contact} />
         ))
       }
     </div>
   )
 }
 
-export { Notes }
+export { Contacts }

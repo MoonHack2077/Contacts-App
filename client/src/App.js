@@ -1,14 +1,14 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Login } from './pages/Login/Login.jsx'
-import { Notes } from './pages/Notes/Notes.jsx'
+import { Contacts } from './pages/Contacts/Contacts.jsx'
 
 function App() {
   return (
     <Router>     
       <Routes>
         <Route exact path="/login" element={ <Login /> } />
-        <Route exact path="/notes/:id" element={ <Notes /> } />
+        <Route exact path="/contacts/:id" element={ <Contacts /> } />
       </Routes>       
     </Router>
   );

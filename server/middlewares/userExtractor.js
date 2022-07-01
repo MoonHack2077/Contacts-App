@@ -13,6 +13,6 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ error: 'Token missing or invalid' })
    }
 
-   req.userId = decodedToken.id
+   req.ownerId = decodedToken.id
    next()
 }
