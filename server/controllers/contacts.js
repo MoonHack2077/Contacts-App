@@ -67,7 +67,10 @@ contactsRouter.post('/', userExtractor, async (request, response) => {
   const savedContact = await newContact.save()
 
   //Concat the new note to the contacts array of the user
-  user.contacts = user.contacts.concat(savedContact._id)
+  user.contacts = user.contacts
+  .concat(savedContact._id)
+  .sort((first, second) => first.name - second.name)
+  
   //Save changes at the user
   await user.save()
 
