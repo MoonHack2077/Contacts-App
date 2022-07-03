@@ -3,7 +3,7 @@ import { login } from '../../services/login.js'
 import { useNavigate } from 'react-router-dom'
 import { FormContainer, Form, InputContainer, Input, Button } from './styles.js'
 import { Alert } from '../Alert/Alert.jsx'
-import jwt from 'jsonwebtoken'
+const jwt =  require('jsonwebtoken')
 
 function LoginForm() {
   const navigate = useNavigate()

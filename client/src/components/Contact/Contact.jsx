@@ -2,10 +2,10 @@ import React from 'react'
 import { Container, ButtonsContainer, Button } from './styles.js'
 import { FaUserEdit } from "react-icons/fa";
 import { MdMoreVert, MdShare } from "react-icons/md";
-import { storageIcon } from '../../helpers/storageIcon.js'
+import { storageIcons } from '../../helpers/storageIcon.js'
 
 function Contact({ name, phonenumber, email, storageLocation }) {
-  const Icon = storageIcon[storageLocation]
+  const Icon = storageIcons[storageLocation]
   return (
     <Container>
         <p>{name}</p>
