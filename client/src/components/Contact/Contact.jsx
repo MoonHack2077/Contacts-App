@@ -6,7 +6,6 @@ import { storageIcons } from '../../helpers/storageIcon.js'
 
 function Contact({ name, phoneNumber, email, storageLocation }) {
   const Icon = storageIcons(storageLocation)
-  console.log(Icon)
   return (
     <Container>
         <p>{name}</p>
@@ -17,9 +16,9 @@ function Contact({ name, phoneNumber, email, storageLocation }) {
           {storageLocation}
         </p>
         <ButtonsContainer>
-          <Button ><FaUserEdit /></Button>
-          <Button ><MdShare /></Button>
-          <Button ><MdMoreVert /></Button>
+          <Button ><FaUserEdit size='20px' /></Button>
+          <Button ><MdShare size='20px' /></Button>
+          <Button ><MdMoreVert size='20px' /></Button>
         </ButtonsContainer>
     </Container>
   )

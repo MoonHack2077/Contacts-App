@@ -13,9 +13,9 @@ function Contacts() {
     setLoad(false)
       getUser(id)
       .then( res => {
-        console.log(res)
+        //console.log(res)
         setUser(res)
-        console.log(user)
+        //console.log(user)
         setLoad(prev => !prev)
 
       }).catch(err => console.error(err.message)) 
@@ -26,9 +26,9 @@ function Contacts() {
     <div>
       {
         load
-        ? user?.contacts?.map(contact => {
-          return <Contact key={contact.id} {...contact} />
-        }) 
+        ? user?.contacts?.map(contact => (
+          <Contact key={contact.id} {...contact} />
+        )) 
         : <p>You don´t have any contacts yet</p>
       }
     </div>

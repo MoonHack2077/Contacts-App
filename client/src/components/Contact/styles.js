@@ -18,11 +18,21 @@ export const ButtonsContainer = styled.div`
     border-radius: 0 0 20px 20px;
     position: absolute;
     bottom: 0;
+    left: 0;
+    overflow: hidden;
 `
 
 export const Button = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    padding: 8px;
     //height: 60px;
     color: #fff;
-    //background-color: ${props => props.bg}
+    background-color: #000;
+
+    &:hover{
+        filter: opacity(.5)
+    }
 `
