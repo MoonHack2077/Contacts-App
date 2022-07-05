@@ -1,32 +1,35 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { BASE_URL } from '../../constants'
 import { Contact } from '../../components/Contact/Contact.jsx'
 import { useParams } from 'react-router-dom'
+import { getUser } from '../../services/users.js'
 
 function Contacts() {
   const [user, setUser] = useState({})
+  const [load, setLoad] = useState(false)
 
   const { id } = useParams('id')
-  const findUser = () => {
-    const foundUser = axios.get(`${BASE_URL}/api/users/${id}`)
-    foundUser
-    .then(res => {
-      console.log(res)
-      setUser(res.data)
-      console.log(user)
-    })
-  }
 
   useEffect(()=>{
-    findUser()
+    setLoad(false)
+      getUser(id)
+      .then( res => {
+        console.log(res)
+        setUser(res)
+        console.log(user)
+        setLoad(prev => !prev)
+
+      }).catch(err => console.error(err.message)) 
+
   }, [])
+
   return (
     <div>
       {
-        user?.contacts.length ? user.contacts.map(contact => (
-          <Contact {...contact} />
-        )) : <p>The user doesn´t have contacts</p>
+        load
+        ? user?.contacts?.map(contact => {
+          return <Contact key={contact.id} {...contact} />
+        }) 
+        : <p>You don´t have any contacts yet</p>
       }
     </div>
   )

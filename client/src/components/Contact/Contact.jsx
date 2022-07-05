@@ -4,12 +4,13 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdMoreVert, MdShare } from "react-icons/md";
 import { storageIcons } from '../../helpers/storageIcon.js'
 
-function Contact({ name, phonenumber, email, storageLocation }) {
-  const Icon = storageIcons[storageLocation]
+function Contact({ name, phoneNumber, email, storageLocation }) {
+  const Icon = storageIcons(storageLocation)
+  console.log(Icon)
   return (
     <Container>
         <p>{name}</p>
-        <p>{phonenumber}</p>
+        <p>{phoneNumber}</p>
         <p>{email}</p>
         <p>
           <Icon size='30px' />

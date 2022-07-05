@@ -25,12 +25,12 @@ function LoginForm() {
     try{
       const user = await login({ email, password })
       if(user) {
+        console.log(user)
         window.sessionStorage.setItem('USERTOKEN', JSON.stringify(user.token))
         navigate(`/contacts/${user.id}`)
-      }else{
-        throw new Error()
       }
     }catch(e){
+      console.log('error')
       console.error(e)
       setError({ message: e.response.data.error, exists: true })
     }
@@ -43,8 +43,8 @@ function LoginForm() {
         {error.exists && <Alert message={error.message} />}
         <Form onSubmit={onSubmit} >
           <InputContainer>
-            <Input placeholder={'Email'} required type="email" value={email} onChange={handleEmail}/>
-            <Input placeholder={'Password'} required type="password" value={password} onChange={handlePassword}/>
+            <Input placeholder='Email' required type="email" value={email} onChange={handleEmail}/>
+            <Input placeholder='Password' required type="password" value={password} onChange={handlePassword}/>
           </InputContainer>
           <Link to='/signup'>create account</Link>
           <Button>Login</Button>
