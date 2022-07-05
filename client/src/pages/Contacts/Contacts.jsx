@@ -7,14 +7,14 @@ import { useParams } from 'react-router-dom'
 function Contacts() {
   const [user, setUser] = useState({})
 
-  const id = useParams()
-  console.log(user)
+  const { id } = useParams('id')
   const findUser = () => {
     const foundUser = axios.get(`${BASE_URL}/api/users/${id}`)
     foundUser
     .then(res => {
       console.log(res)
-      setUser(res)
+      setUser(res.data)
+      console.log(user)
     })
   }
 
@@ -24,9 +24,9 @@ function Contacts() {
   return (
     <div>
       {
-        user?.contacts?.map(contact => (
+        user?.contacts.length ? user.contacts.map(contact => (
           <Contact {...contact} />
-        ))
+        )) : <p>The user doesn´t have contacts</p>
       }
     </div>
   )

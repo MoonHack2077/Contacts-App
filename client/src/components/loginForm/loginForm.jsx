@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { login } from '../../services/login.js'
-import { useNavigate } from 'react-router-dom'
-import { FormContainer, Form, InputContainer, Input, Button } from './styles.js'
+import { useNavigate, Link } from 'react-router-dom'
+import { FormContainer, Form, InputContainer, Input, Button } from '../../styles/forms.js'
 import { Alert } from '../Alert/Alert.jsx'
 
 function LoginForm() {
@@ -27,6 +27,8 @@ function LoginForm() {
       if(user) {
         window.sessionStorage.setItem('USERTOKEN', JSON.stringify(user.token))
         navigate(`/contacts/${user.id}`)
+      }else{
+        throw new Error()
       }
     }catch(e){
       console.error(e)
@@ -44,6 +46,7 @@ function LoginForm() {
             <Input placeholder={'Email'} required type="email" value={email} onChange={handleEmail}/>
             <Input placeholder={'Password'} required type="password" value={password} onChange={handlePassword}/>
           </InputContainer>
+          <Link to='/signup'>create account</Link>
           <Button>Login</Button>
         </Form>
       </FormContainer>

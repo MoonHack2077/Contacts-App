@@ -7,7 +7,6 @@ loginRouter.post('/', async (request, response)=>{
     try{
         const { email, password } = request.body
         const user = await User.findOne({ email })
-        console.table({user})
         const verify = user === null ? false : bcrypt.compare(password, user.password)
         
         if(!(user && verify)){

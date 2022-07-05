@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { primaryColorForm } from '../../constants.js'
+import { primaryColorForm } from '../constants.js'
 
 export const FormContainer = styled.div`
     display: grid;
