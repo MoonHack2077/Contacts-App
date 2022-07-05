@@ -3,7 +3,6 @@ import { login } from '../../services/login.js'
 import { useNavigate } from 'react-router-dom'
 import { FormContainer, Form, InputContainer, Input, Button } from './styles.js'
 import { Alert } from '../Alert/Alert.jsx'
-const jwt =  require('jsonwebtoken')
 
 function LoginForm() {
   const navigate = useNavigate()
@@ -27,8 +26,7 @@ function LoginForm() {
       const user = await login({ email, password })
       if(user) {
         window.sessionStorage.setItem('USERTOKEN', JSON.stringify(user.token))
-        const decodedToken = jwt.verify(user.token, process.env.SECRETWORD)
-        navigate(`/contacts/${decodedToken.id}`)
+        navigate(`/contacts/${user.id}`)
       }
     }catch(e){
       console.error(e)

@@ -8,9 +8,10 @@ const User = require('../models/User.js')
 //So this path is according to the last one
 userRouter.post('/', async (request, response)=>{
   const { name, email, password } = request.body
-
+  console.table({ name, email, password })
   //The second parameter is the algoritmic complexity for the encryptation
-  const passwordHash = await bcrypt.hash(password, 10)
+  const salt = await bcrypt.genSalt(10)
+  const passwordHash = await bcrypt.hash(password, salt)
   const newUser = new User({
     name,
     email,

@@ -5,12 +5,12 @@ const connectionString = NODE_ENV === 'test' ? MONGO_DB_URI_TEST : MONGO_DB_URI
 
 // Conection to mongodb
 // returns a promise
-mongoose.connect(connectionString)
-  .then(() => {
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then( () => {
     console.log('DATABASE CONNECTED')
-  })
-  .catch(console.error)
-
-// process.on('uncaughtException', error => {
-//   mongoose.connection.close()
-// })  
+  } )
+  .catch(err => console.error({error: err.message}))
+ 
