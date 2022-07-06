@@ -1,10 +1,7 @@
-const mongoose = require('mongoose')
-const contactsRouter = require('express').Router()
 const Contact = require('../models/Contact.js')
 const User = require('../models/User.js')
-const userExtractor = require('../middlewares/userExtractor.js')
 
-contactsRouter.get('/:id', async (request, response, next) => {
+const getOneContact =  async (request, response, next) => {
 // With request.params we are getting the param from the url that we need
 // Always it will return a string, so according to our needs we must turn the type
   try{  
@@ -17,9 +14,9 @@ contactsRouter.get('/:id', async (request, response, next) => {
   }catch(error){
     console.log({error})
   }
-})
+}
 
-contactsRouter.get('/', async (request, response) => {
+const getAllContacts = async (request, response) => {
    try{
     const contacts = await Contact.find({}).populate('owner',{
       email: 1,
@@ -29,9 +26,9 @@ contactsRouter.get('/', async (request, response) => {
    }catch(error){
     console.log({error})
    }
-})
+}
 
-contactsRouter.delete('/:id', userExtractor, async (request, response, next) => {
+const deleteContact = async (request, response, next) => {
   try{  
     const { id } = request.params
     const removedContact = await Contact.findByIdAndRemove(id)
@@ -42,10 +39,10 @@ contactsRouter.delete('/:id', userExtractor, async (request, response, next) => 
   }catch(error){
     console.log(error)
    }
-})
+}
 
 
-contactsRouter.post('/', userExtractor, async (request, response) => {
+const postContact = async (request, response) => {
   const { name, phoneNumber, storageLocation } = request.body
 
   if (!name) {
@@ -76,9 +73,9 @@ contactsRouter.post('/', userExtractor, async (request, response) => {
 
   // The 201 state is 'created'
   response.status(201).json(savedContact)
-})
+}
 
-contactsRouter.put('/api/contacts/:id', async (request, response) => {
+const putContact = async (request, response) => {
   const { id } = request.params
   const { name, phoneNumber, storageLocation, email } = request.body
 
@@ -96,6 +93,12 @@ contactsRouter.put('/api/contacts/:id', async (request, response) => {
   //Otherwise the promise returns one which was found by id
   const updatedContact = Contact.findByIdAndUpdate(id, newContact, { new: true })
   response.status(200).json(updatedContact)
-})
+}
 
-module.exports = contactsRouter
+module.exports = {
+  getOneContact,
+  getAllContacts,
+  putContact,
+  postContact,
+  deleteContact
+}

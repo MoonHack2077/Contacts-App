@@ -4,22 +4,23 @@ require('./mongo.js')
 
 const express = require('express')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 const app = express()
 
+app.use(bodyParser.urlencoded({ extended: true }))
+// MIDDLEWARE are functions which intercept the request that is passing through the API
+app.use(express.json())
+// CORS allow the acces from spesific origins
+app.use(cors())
+
 //ROUTES
-const usersRouter = require('./controllers/users.js')
-const contactsRouter = require('./controllers/contacts.js')
-const loginRouter = require('./controllers/login.js')
+const usersRouter = require('./routes/users.route.js')
+const contactsRouter = require('./routes/contacts.route.js')
+const loginRouter = require('./routes/login.route.js')
 
 //MIDDLEWARES
 const notFound = require('./middlewares/notFound.js')
 const handleError = require('./middlewares/handleErrors.js')
-
-// CORS allow the acces from spesific origins
-app.use(cors())
-
-// MIDDLEWARE are functions which intercept the request that is passing through the API
-app.use(express.json())
 
 //Using routes to have a clean code
 app.use('/login', loginRouter)
