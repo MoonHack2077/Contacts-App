@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { signUp } from '../../services/signUp.js'
+import { signUp } from '../services/signUp.js'
 import { useNavigate } from 'react-router-dom'
-import { FormContainer, Form, InputContainer, Input, Button } from '../../styles/forms.js'
+import { FormContainer, Form, InputContainer, Input, Button } from '../styles/forms.js'
 
 function SignUp(){
     const navigate = useNavigate()

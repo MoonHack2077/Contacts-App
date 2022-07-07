@@ -1,5 +1,6 @@
 import React from 'react'
-import { Container, ButtonsContainer, Button } from './styles.js'
+import { Container, ButtonsContainer } from './styles.js'
+import { Button } from '../../styles/button.js'
 import { FaUserEdit } from "react-icons/fa";
 import { MdMoreVert, MdShare } from "react-icons/md";
 import { storageIcons } from '../../helpers/storageIcon.js'

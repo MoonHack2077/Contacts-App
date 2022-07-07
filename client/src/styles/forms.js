@@ -4,8 +4,8 @@ import { primaryColorForm } from '../constants.js'
 export const FormContainer = styled.div`
     display: grid;
     place-items: center;
-    background-color: #000;
-    min-width: 100vw;
+    //background-color: #000;
+    min-width: 100%;
     min-height: 100vh
 `
 
