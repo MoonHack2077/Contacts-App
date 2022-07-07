@@ -19,3 +19,8 @@ export const Ops = styled.div`
     bottom: 0;
     gap: 20px
 `
+
+export const Span = styled.span`
+    font-size: ${ props => `${props.fz}px` };
+    line-height: 2
+`

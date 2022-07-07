@@ -27,7 +27,7 @@ function Contacts() {
 
   return (
     <ContactsLayout>
-      <Options contacts={user?.contacts?.length} />
+      <Options name={user?.name} contacts={user?.contacts?.length} />
       <ContactsList>
         {
           (load && user?.contacts?.length )
