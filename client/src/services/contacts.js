@@ -13,8 +13,12 @@ export const getOneContact = async (id) => {
     return  data
 }
 
-export const postNewContact = async (newNote) => {
-    const { data } = await axios.post(URL, newNote)
+export const postNewContact = async (newContact, token) => {
+    const { data } = await axios.post(URL, newContact, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
     return  data
 }
 
@@ -23,7 +27,7 @@ export const deleteContact = async (id) =>{
     return data
 }
 
-export const updateContact = async (id, newNote) => {
-    const { data } = await axios.put(`${URL}/${id}`, newNote)
+export const updateContact = async (id, newContact) => {
+    const { data } = await axios.put(`${URL}/${id}`, newContact)
     return  data
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Contact } from '../components/Contact/Contact.jsx'
-import { Options } from '../components/Options/Options.jsx'
+import { Contact } from '../../components/Contact/Contact.jsx'
+import { Options } from '../../components/Options/Options.jsx'
 import { useParams } from 'react-router-dom'
-import { getUser } from '../services/users.js'
-import { ContactsLayout } from '../containers/ContactsLayout.jsx'
-import { ContactsList } from '../containers/ContactsList.jsx'
+import { getUser } from '../../services/users.js'
+import { ContactsLayout } from '../../containers/ContactsLayout.jsx'
+import { ContactsList } from '../../containers/ContactsList.jsx'
 
 function Contacts() {
   const [user, setUser] = useState({})

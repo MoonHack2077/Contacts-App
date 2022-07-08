@@ -61,3 +61,11 @@ export const Button = styled.button`
         filter: brightness(.8)
     }
 `
+
+export const StorageLocations = styled.select`
+    outline: orange
+`
+
+export const Option = styled.option`
+    color: green
+`

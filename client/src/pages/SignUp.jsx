@@ -28,7 +28,7 @@ function SignUp(){
             const user = await signUp({ name, email, password })
             if(user){
                 console.log(user)
-                navigate(`contacts/${user.id}`)
+                navigate(`/contacts/${user.id}`)
             }
         }catch(error){
             console.error(error)

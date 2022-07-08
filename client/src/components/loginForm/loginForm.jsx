@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { login } from '../../services/login.js'
 import { useNavigate, Link } from 'react-router-dom'
+import { Provider } from '../../Context.js'
 import { FormContainer, Form, InputContainer, Input, Button } from '../../styles/forms.js'
 import { Alert } from '../Alert/Alert.jsx'
 
 function LoginForm() {
+  const [user,handleUser] = Provider()
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
@@ -23,15 +25,14 @@ function LoginForm() {
     e.preventDefault()
 
     try{
-      const user = await login({ email, password })
-      if(user) {
-        console.log(user)
-        window.sessionStorage.setItem('USERTOKEN', JSON.stringify(user.token))
-        navigate(`/contacts/${user.id}`)
+      const loggedUser = await login({ email, password })
+      if(loggedUser) {
+        handleUser(loggedUser)
+        console.log(user, loggedUser)
+        window.sessionStorage.setItem('USERTOKEN', JSON.stringify(loggedUser.token))
+        navigate(`/contacts/${loggedUser.id}`)
       }
     }catch(e){
-      console.log('error')
-      console.error(e)
       setError({ message: e.response.data.error, exists: true })
     }
     
