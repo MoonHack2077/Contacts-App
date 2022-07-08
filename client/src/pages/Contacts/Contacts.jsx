@@ -18,7 +18,7 @@ function Contacts() {
       .then( res => {
         //console.log(res)
         setUser(res)
-        //console.log(user)
+        console.log(res)
         setLoad(prev => !prev)
 
       }).catch(err => console.error(err.message)) 

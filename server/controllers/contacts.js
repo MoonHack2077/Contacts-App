@@ -43,7 +43,7 @@ const deleteContact = async (request, response, next) => {
 
 
 const postContact = async (request, response) => {
-  const { name, phoneNumber, storageLocation } = request.body
+  const { name, phoneNumber, storageLocation, email } = request.body
 
   if (!name) {
     response.status(400).json({ error: 'No name' }).end()
@@ -58,15 +58,14 @@ const postContact = async (request, response) => {
     name,
     phoneNumber,
     storageLocation,
+    email,
     owner: user._id
   })
 
   const savedContact = await newContact.save()
 
   //Concat the new note to the contacts array of the user
-  user.contacts = user.contacts
-  .concat(savedContact._id)
-  .sort((first, second) => first.name - second.name)
+  user.contacts = user.contacts.concat(savedContact._id)
   
   //Save changes at the user
   await user.save()

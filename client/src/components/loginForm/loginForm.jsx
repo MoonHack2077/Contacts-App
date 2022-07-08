@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { login } from '../../services/login.js'
-import { useNavigate, Link } from 'react-router-dom'
-import { Context } from '../../Context.js'
+import { useNavigate } from 'react-router-dom'
 import { FormContainer, Form, InputContainer, Input, Button } from '../../styles/forms.js'
+import { StyledLink } from './styles.js'
 import { Alert } from '../Alert/Alert.jsx'
 
 function LoginForm() {
-  const { activateUser } = useContext(Context)
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
@@ -27,7 +26,7 @@ function LoginForm() {
     try{
       const loggedUser = await login({ email, password })
       if(loggedUser) {
-        activateUser(loggedUser)
+        window.sessionStorage.setItem('USERTOKEN', loggedUser.token)
         navigate(`/contacts/${loggedUser.id}`)
       }
     }catch(e){
@@ -46,7 +45,7 @@ function LoginForm() {
             <Input placeholder='Email' required type="email" value={email} onChange={handleEmail}/>
             <Input placeholder='Password' required type="password" value={password} onChange={handlePassword}/>
           </InputContainer>
-          <Link to='/signup'>create account</Link>
+          <StyledLink to='/signup'>create account</StyledLink>
           <Button>Login</Button>
         </Form>
       </FormContainer>
