@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { login } from '../../services/login.js'
 import { useNavigate, Link } from 'react-router-dom'
-import { Provider } from '../../Context.js'
+import { Context } from '../../Context.js'
 import { FormContainer, Form, InputContainer, Input, Button } from '../../styles/forms.js'
 import { Alert } from '../Alert/Alert.jsx'
 
 function LoginForm() {
-  const [user,handleUser] = Provider()
+  const { activateUser } = useContext(Context)
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
@@ -27,12 +27,11 @@ function LoginForm() {
     try{
       const loggedUser = await login({ email, password })
       if(loggedUser) {
-        handleUser(loggedUser)
-        console.log(user, loggedUser)
-        window.sessionStorage.setItem('USERTOKEN', JSON.stringify(loggedUser.token))
+        activateUser(loggedUser)
         navigate(`/contacts/${loggedUser.id}`)
       }
     }catch(e){
+      console.error(e)
       setError({ message: e.response.data.error, exists: true })
     }
     

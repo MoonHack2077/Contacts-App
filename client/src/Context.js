@@ -1,17 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useState, createContext } from 'react'
 
-//const Context = createContext()
+export const Context = createContext()
 
-export const Provider = () => {
+export const Provider = ({ children }) => {
     const [user, setUser] = useState({})
 
-    const handleUser = newUser => {
-        setUser(newUser)
+    const value = {
+        user,
+        activateUser: userLogged => {
+            setUser(userLogged)
+            window.sessionStorage.setItem('USERTOKEN', JSON.stringify(userLogged.token))
+        },
+        removeUser: () => {
+            setUser(null)
+            window.sessionStorage.removeItem('USERTOKEN')
+        }
     }
 
-    useEffect(()=>{
-        console.log(user)
-    }, [user])
-
-    return [user, handleUser]
+    return (
+        <Context.Provider value={value}>
+            {children}
+        </Context.Provider> 
+    )
 }

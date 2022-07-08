@@ -1,19 +1,18 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useContext } from 'react'
 import { postNewContact } from '../../services/contacts.js'
 import { useNavigate } from 'react-router-dom'
 import { storageLocations } from '../../constants.js'
-import { Provider } from '../../Context.js'
+import { Context } from '../../Context.js'
 import { FormContainer, Form, InputContainer, Input, Button, StorageLocations, Option } from '../../styles/forms.js'
 
 export function AddContact(){
     const navigate = useNavigate()
-    const [user, handleUser] = Provider()
-    console.log(user)
+    const { user } = useContext(Context)
     const [email, setEmail] = useState('')
     const [phone, setPHone] = useState('')
     const [name, setName] = useState('')
     const [storageLocation, setStorageLocation] = useState('')
-    const ref = useRef(null)
+    
 
     const handleEmail = e => {
         setEmail(e.target.value)
@@ -27,9 +26,8 @@ export function AddContact(){
         setName(e.target.value)
     }
 
-    const handleStorageocation = () => {
-        console.log(ref)
-        setStorageLocation(ref.options[ref.selectedIndex].value)
+    const handleStorageocation = ({ target }) => {
+        setStorageLocation(target.options[target.selectedIndex].value)
     }
 
     const onSubmit = async e => {
@@ -39,7 +37,6 @@ export function AddContact(){
             const token = window.sessionStorage.getItem('USERTOKEN')
             const newContact = await postNewContact({ name, email, phone, storageLocation, owner: user.id }, token)
             if(newContact){
-                console.log(newContact)
                 navigate(`/contacts/${user.id}`)
             }
         }catch(error){
@@ -51,7 +48,7 @@ export function AddContact(){
     return(
         <FormContainer>
             <Form onSubmit={onSubmit} >
-                <StorageLocations ref={ref} onChange={handleStorageocation} >
+                <StorageLocations onChange={handleStorageocation} >
                     {
                         storageLocations.map((location, index) => (
                             <Option key={index} value={location} >{location}</Option>
